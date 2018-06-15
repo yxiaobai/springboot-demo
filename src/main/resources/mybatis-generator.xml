@@ -51,7 +51,7 @@
         </table>-->
         <table tableName="T_user" domainObjectName="TUser">
             <property name="useActualColumnNames" value="true" />
-            <generatedKey column="ID" sqlStatement="SqlServer" identity="true"/>
+            <generatedKey column="ID" sqlStatement="MySql" identity="true"/>
         </table>
 
     </context>
