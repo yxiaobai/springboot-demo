@@ -44,9 +44,15 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
         <!--生成对应表及类名-->
-        <table tableName="T_user" domainObjectName="TUser"
+        <!--<table tableName="T_user" domainObjectName="TUser"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
-               selectByExampleQueryId="false"></table>
+               selectByExampleQueryId="false">
+        </table>-->
+        <table tableName="T_user" domainObjectName="TUser">
+            <property name="useActualColumnNames" value="true" />
+            <generatedKey column="ID" sqlStatement="SqlServer" identity="true"/>
+        </table>
+
     </context>
 </generatorConfiguration>
