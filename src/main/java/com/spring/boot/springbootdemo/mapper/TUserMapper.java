@@ -93,4 +93,6 @@ public interface TUserMapper {
      * @mbg.generated
      */
     int updateByPrimaryKey(TUser record);
+
+    List<TUser> getUserList();
 }

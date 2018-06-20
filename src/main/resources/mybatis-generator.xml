@@ -7,7 +7,7 @@
     <!-- 数据库驱动-->
     <classPathEntry location="D:\mv-repo\mysql\mysql-connector-java\5.1.46\mysql-connector-java-5.1.46.jar" />
 
-    <context id="DB2Tables"    targetRuntime="MyBatis3">
+    <context id="MysqlTables"    targetRuntime="MyBatis3">
         <commentGenerator>
             <!--关闭时间注释 -->
             <property name="suppressDate" value="true"/>
@@ -49,6 +49,7 @@
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>-->
+        <!--这样会同时生成  example  Criteria  方法     如果不需要用上面的就可以-->
         <table tableName="T_user" domainObjectName="TUser">
             <property name="useActualColumnNames" value="true" />
             <generatedKey column="ID" sqlStatement="MySql" identity="true"/>
