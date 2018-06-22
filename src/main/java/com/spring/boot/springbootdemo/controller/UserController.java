@@ -32,4 +32,8 @@ private Logger logger = LoggerFactory.getLogger(UserController.class);
         logger.info("获取成功");
         return users;
     }
+    @RequestMapping(value = "addUser")
+    public void addUser(String name,String sex){
+        userService.addUser(name,sex);
+    }
 }
