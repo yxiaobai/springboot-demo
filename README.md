@@ -2,4 +2,4 @@
 springboot-demo
 
 
-SpringBoot 整合SSM 
+SpringBoot 整合  Sping+Mybatis+Generator+ApiInterceptor+Quartz
