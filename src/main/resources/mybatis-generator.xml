@@ -5,7 +5,7 @@
 <generatorConfiguration>
     <properties resource="application.properties" />
     <!-- 数据库驱动-->
-    <classPathEntry location="D:\mv-repo\mysql\mysql-connector-java\5.1.46\mysql-connector-java-5.1.46.jar" />
+    <classPathEntry location="D:\maven\repository\mysql\mysql-connector-java\5.1.47\mysql-connector-java-5.1.47.jar" />
 
     <context id="MysqlTables"    targetRuntime="MyBatis3">
         <commentGenerator>
@@ -40,7 +40,7 @@
                 type="MIXEDMAPPER",生成基于注解的Java Model 和相应的Mapper对象
                 type="XMLMAPPER",生成SQLMap XML文件和独立的Mapper接口
         -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.spring.boot.springbootdemo.mapper" targetProject="src/main/java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.spring.boot.springbootdemo.mapper.mbg" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
         <!--生成对应表及类名-->
@@ -50,7 +50,7 @@
                selectByExampleQueryId="false">
         </table>-->
         <!--这样会同时生成  example  Criteria  方法     如果不需要用上面的就可以-->
-        <table tableName="T_user" domainObjectName="TUser">
+        <table tableName="v_user_role_function" domainObjectName="UserRoleFunction">
             <property name="useActualColumnNames" value="true" />
             <generatedKey column="ID" sqlStatement="MySql" identity="true"/>
         </table>

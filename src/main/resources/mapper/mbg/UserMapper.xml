@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.boot.springbootdemo.mapper.UserMapper">
+
+  <resultMap id="BaseResultUserMap" type="com.spring.boot.springbootdemo.model.TUser">
+
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="LoginID" jdbcType="VARCHAR" property="loginID" />
+    <result column="PassWord" jdbcType="VARCHAR" property="passWord" />
+    <result column="LastName" jdbcType="VARCHAR" property="lastName" />
+    <result column="Status" jdbcType="INTEGER" property="status" />
+    <result column="SignPath" jdbcType="VARCHAR" property="signPath" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="creator" jdbcType="INTEGER" property="creator" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="updateUser" jdbcType="INTEGER" property="updateUser" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+
+  <select id="getLoginUser" parameterType="com.spring.boot.springbootdemo.model" resultMap="BaseResultMap">
+    SELECT
+    *
+    FROM t_user WHERE LoginID=#{loginID} AND PassWord=#{passWord}
+  </select>
+
+</mapper>

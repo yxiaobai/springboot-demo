@@ -1,4 +1,4 @@
-package com.spring.boot.springbootdemo.mapper;
+package com.spring.boot.springbootdemo.mapper.mbg;
 
 import com.spring.boot.springbootdemo.model.TUser;
 import com.spring.boot.springbootdemo.model.TUserExample;
@@ -93,6 +93,4 @@ public interface TUserMapper {
      * @mbg.generated
      */
     int updateByPrimaryKey(TUser record);
-
-    List<TUser> getUserList();
 }
