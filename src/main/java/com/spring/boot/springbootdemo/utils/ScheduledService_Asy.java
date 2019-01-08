@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * Created by MZC on 18-9-7
+ * 注解方式
  */
 @Component
 public class ScheduledService_Asy {
@@ -22,5 +23,10 @@ public class ScheduledService_Asy {
     @Scheduled(fixedDelay = 5000)
     public void scheduled2() {
         logger.info("=====>>>>>fixedDelay{}",System.currentTimeMillis());
+    }
+
+    @Scheduled(cron = "0/10 * * * * *")
+    public void reportCurrentByCron(){
+        System.out.println ("Scheduling Tasks Examples By Cron: The time is now " + System.currentTimeMillis());
     }
 }
