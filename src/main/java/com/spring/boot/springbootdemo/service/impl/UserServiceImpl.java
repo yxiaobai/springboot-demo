@@ -13,6 +13,8 @@ import com.spring.boot.springbootdemo.model.UserRoleFunctionExample;
 import com.spring.boot.springbootdemo.service.UserService;
 import com.spring.boot.springbootdemo.utils.ApiResult;
 import com.spring.boot.springbootdemo.utils.MD5Utils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,7 @@ import java.util.Date;
 import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
+    private static final Log logger = LogFactory.getLog(UserServiceImpl.class);
     @Autowired
     private UserMapper userMapper;
     @Autowired
@@ -52,24 +55,27 @@ public class UserServiceImpl implements UserService {
         criteria.andLoginIDEqualTo(dto.getLoginID());
         List<TUser> userList = userMapper.selectByExample(example);
         if (userList.size()>0){
-            result.setMsg("该账号已存在，请重新添加");
+            result.setMsg("该用户已存在，请重新输入!");
             result.setData(Boolean.FALSE);
         }else {
-            TUser user = new TUser();
-            user.setLoginID(dto.getLoginID());
-            user.setPassWord(MD5Utils.GetMD5Code(dto.getPassWord()));
-            user.setLastName(dto.getLastName());
-            user.setAddress(dto.getAddress());
-            user.setPhone(dto.getPhone());
-            user.setSignPath(dto.getSignPath());
-            user.setStatus(EnumModelType.keyong.getNum());
-            user.setCreator(1);
-            user.setCreateTime(new Date());
-            user.setUpdateTime(new Date());
-            user.setUpdateUser(1);
-            int id = userMapper.insertSelective(user);
-            if (id!=0){
+            try {
+                TUser user = new TUser();
+                user.setLoginID(dto.getLoginID());
+                user.setPassWord(MD5Utils.GetMD5Code(dto.getPassWord()));
+                user.setLastName(dto.getLastName());
+                user.setAddress(dto.getAddress());
+                user.setPhone(dto.getPhone());
+                user.setSignPath(dto.getSignPath());
+                user.setStatus(EnumModelType.keyong.getNum());
+                user.setCreator(1);
+                user.setCreateTime(new Date());
+                user.setUpdateTime(new Date());
+                user.setUpdateUser(1);
+                int id = userMapper.insertSelective(user);
                 result.setData(Boolean.TRUE);
+            }catch (Exception e){
+                result.setData(Boolean.FALSE);
+                logger.error("addUser error.......",e);
             }
         }
         return result;
@@ -111,24 +117,34 @@ public class UserServiceImpl implements UserService {
     @Override
     public ApiResult<Boolean> delUser(Integer id) {
         ApiResult<Boolean> result = ApiResult.makeSuccessResult();
-        userMapper.deleteByPrimaryKey(id);
-        result.setData(Boolean.TRUE);
+       try {
+           userMapper.deleteByPrimaryKey(id);
+           result.setData(Boolean.TRUE);
+       }catch (Exception e){
+           result.setData(Boolean.FALSE);
+           logger.error("delUser error......",e);
+       }
         return result;
     }
 
     @Override
     public ApiResult<Boolean> updateUser(TUser user) {
         ApiResult<Boolean> result = ApiResult.makeSuccessResult();
-        TUser user1 = new TUser();
-        user.setPhone(user.getPhone());
-        user.setAddress(user.getAddress());
-        user.setUpdateTime( new Date());
-        TUserExample example = new TUserExample();
-        TUserExample.Criteria criteria =example.createCriteria();
-        criteria.andLoginIDEqualTo(user.getLoginID());
-        criteria.andPassWordEqualTo(MD5Utils.GetMD5Code(user.getPassWord()));
-        userMapper.updateByExampleSelective(user1,example);
-        result.setData(Boolean.TRUE);
+        try {
+            TUser user1 = new TUser();
+            user.setPhone(user.getPhone());
+            user.setAddress(user.getAddress());
+            user.setUpdateTime( new Date());
+            TUserExample example = new TUserExample();
+            TUserExample.Criteria criteria =example.createCriteria();
+            criteria.andLoginIDEqualTo(user.getLoginID());
+            criteria.andPassWordEqualTo(MD5Utils.GetMD5Code(user.getPassWord()));
+            userMapper.updateByExampleSelective(user1,example);
+            result.setData(Boolean.TRUE);
+        }catch (Exception e){
+            result.setData(Boolean.FALSE);
+            logger.error("updareUser error.......",e);
+        }
         return result;
     }
 }
