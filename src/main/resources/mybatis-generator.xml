@@ -53,6 +53,8 @@
         <table tableName="t_storage" domainObjectName="Storage">
             <property name="useActualColumnNames" value="false" />
             <generatedKey column="ID" sqlStatement="MySql" identity="true"/>
+            <!--这样会把text等特大类型的字段转换成String类型-->
+            <!--<columnOverride column="xxxxx" jdbcType="VARCHAR" />-->
         </table>
 
     </context>
